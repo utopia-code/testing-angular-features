@@ -1,1 +1,30 @@
-<p>home-page works!</p>
+<div class="container">
+    <h1>Listado de alumnos</h1>
+
+    @if (students.length > 0) {
+        <table>
+            <thead>
+                <tr>
+                    <th  *ngFor="let column of columnsTable">{{ column }}</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @for (student of students; track $index) {
+                    <tr>
+                        <td>{{ student.name }} {{ student.surname }}</td>
+                        <td>{{ student.genre }}</td>
+                        @if (student.note > 5) {
+                            <td>Aprobado</td>
+                        } @else {
+                            <td>Suspendido</td>
+                        }
+                        <td>{{ student.absences }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    } @else {
+        <div>El listado de alumnos está vacío</div>
+    }
+</div>

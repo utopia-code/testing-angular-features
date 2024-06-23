@@ -1,0 +1,21 @@
+table {
+    min-width: 100%;
+    border-spacing: 0;
+}
+
+thead,
+tbody {
+    vertical-align: middle;
+}
+
+tr {
+    vertical-align: inherit;
+    height: 56px;
+}
+
+th,
+td {
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    text-align: left;
+}
