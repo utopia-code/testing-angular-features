@@ -15,24 +15,8 @@ export class HomePageComponent {
 
   ngOnInit(): void {
     this.studentService.getStudents().subscribe((data) => {
-
-      data.forEach(item => {
-        item.genre = this.getGenre(item.genre)
-      });
-
       this.students = data;
       // this.students = [];
     })
-  }
-
-  getGenre(genre: string): string {
-    switch (genre) {
-      case 'M':
-        return 'Masculino';
-      case 'F': 
-        return 'Femenino';
-      default:
-        return 'No binario';
-    }
   }
 }

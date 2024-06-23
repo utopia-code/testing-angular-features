@@ -22,12 +22,12 @@ export class StudentService {
                         console.log('Parsed: ', result);
                     }
                 });
-
+                
                 const students: StudentDTO[] = parsedData.data.map((item: any) => ({
                     id: +item.ID_Alumno,
                     name: item.Nombre,
                     surname: item.Apellidos,
-                    genre: item.Sexo,
+                    genre: this.getGenre(item.Sexo),
                     note: +item.Nota_Final,
                     absences: +item.Faltas_Asistencia
                 }));
@@ -40,4 +40,15 @@ export class StudentService {
             })
         )
     }
+
+    getGenre(genre: string): string {
+        switch (genre) {
+          case 'M':
+            return 'Masculino';
+          case 'F': 
+            return 'Femenino';
+          default:
+            return 'No binario';
+        }
+      }
 }
