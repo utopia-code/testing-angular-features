@@ -1,0 +1,27 @@
+.virtual-scroll-viewport {
+    height: 200px;
+    width: 100%;
+}
+
+.virtual-scroll-item {
+    height: 50px;
+}
+
+.head {
+    font-weight: bold;
+    height: 50px;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+li {
+    padding: 0 16px;
+}

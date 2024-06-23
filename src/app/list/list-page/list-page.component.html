@@ -1,1 +1,26 @@
-<p>list-page works!</p>
+<div class="container">
+    <h1>Listado de alumnos: visualización con virtual scrolling</h1>
+
+    @if (students.length > 0) {
+        <ul class="head">
+            <li *ngFor="let column of gridHead">{{ column }}</li>
+        </ul>
+
+        <cdk-virtual-scroll-viewport appendOnly itemSize="30" class="virtual-scroll-viewport">
+
+            <ul *cdkVirtualFor="let student of students" class="virtual-scroll-item">
+                <li>{{ student.name }} {{ student.surname }}</li>
+                <li>{{ student.genre }}</li>
+                @if (student.note > 5) {
+                    <li>Aprobado</li>
+                } @else {
+                    <li>Suspendido</li>
+                }
+                <li>{{ student.absences }}</li>
+            </ul>
+            
+        </cdk-virtual-scroll-viewport>
+    } @else {
+        <div>El listado de alumnos está vacío</div>
+    }
+</div>

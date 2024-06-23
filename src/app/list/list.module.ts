@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ListPageComponent } from './list-page/list-page.component';
 import { ListRoutingModule } from './list-routing.module';
 
@@ -8,7 +9,8 @@ import { ListRoutingModule } from './list-routing.module';
   declarations: [ListPageComponent],
   imports: [
     CommonModule,
-    ListRoutingModule
+    ListRoutingModule,
+    ScrollingModule
   ]
 })
 export class ListModule { }
