@@ -24,12 +24,12 @@ export class StudentService {
                 });
                 
                 const students: StudentDTO[] = parsedData.data.map((item: any) => ({
-                    id: +item.ID_Alumno,
+                    id: item.ID_Alumno,
                     name: item.Nombre,
                     surname: item.Apellidos,
                     genre: this.getGenre(item.Sexo),
-                    note: +item.Nota_Final,
-                    absences: +item.Faltas_Asistencia
+                    note: item.Nota_Final,
+                    absences: item.Faltas_Asistencia
                 }));
 
                 return students
