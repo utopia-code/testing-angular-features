@@ -1,5 +1,28 @@
 .block {
     width: 100%;
     height: 500px;
-    background-color: beige;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.bg-blue {
+    background-color: #e1e8ea;
+}
+
+.bg-violet {
+    background-color: #e5e0ea;
+}
+
+.bg-x {
+    background-color: #f7f7f7;
+}
+
+.mt-5 {
+    margin-top: 1.5rem;
+}
+
+.p-2 {
+    padding: 1rem;
 }

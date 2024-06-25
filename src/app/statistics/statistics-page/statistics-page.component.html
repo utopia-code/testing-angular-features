@@ -1,26 +1,23 @@
-@defer() {
-    <div class="mt-5">
-        <p>Defer</p>
+<div class="container">
+
+    <h1>Estadísticas del listado de alumnos</h1>
+
+    @defer() {
         <app-resume-data></app-resume-data>
-    </div>
-} @placeholder {
-    <p class="block mt-5">Loading ...</p>
-}
+    } @placeholder {
+        <p class="block bg-blue p-2">Loading ...</p>
+    }
 
-@defer(on viewport) {
-    <div class="mt-5">
-        <p>Defer</p>
+    @defer(on viewport) {
         <app-gender></app-gender>
-    </div>
-} @placeholder {
-    <p class="block mt-5">Loading ...</p>
-}
+    } @placeholder {
+        <p class="block bg-violet mt-5">Loading ...</p>
+    }
 
-@defer(on viewport) {
-    <div class="mt-5">
-        <p>Defer</p>
+     @defer(on viewport) {
         <app-general-results></app-general-results>
-    </div>
-} @placeholder {
-    <p class="block mt-5">Loading ...</p>
-}
+    } @placeholder {
+        <p class="block bg-x mt-5">Loading ...</p>
+    }
+
+</div>
