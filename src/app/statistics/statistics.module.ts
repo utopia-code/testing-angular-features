@@ -7,6 +7,8 @@ import { ResumeDataComponent } from './resume-data/resume-data.component';
 import { StatisticsPageComponent } from './statistics-page/statistics-page.component';
 import { StatisticsRoutingModule } from './statistics-routing.module';
 
+import { BaseChartDirective } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     StatisticsPageComponent, 
@@ -16,7 +18,8 @@ import { StatisticsRoutingModule } from './statistics-routing.module';
   ],
   imports: [
     CommonModule,
-    StatisticsRoutingModule
-  ]
+    StatisticsRoutingModule,
+    BaseChartDirective
+  ],
 })
 export class StatisticsModule { }
