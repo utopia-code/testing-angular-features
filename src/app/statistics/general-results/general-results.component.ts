@@ -48,23 +48,27 @@ export class GeneralResultsComponent implements OnInit{
         }, { totalPassStudents: 0, totalFailStudents: 0 }
       )
 
-      this.barChartDatasets = [
-        { 
-          data: [totalPassStudents, totalFailStudents], 
-          label: 'Total',
-          backgroundColor: [
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(255, 99, 132, 0.2)'
-          ], 
-          borderColor: [
-            'rgb(75, 192, 192)',
-            'rgb(255, 99, 132)'
-          ], 
-          borderWidth: 1
-        }
-      ];
+      this.showChart([totalPassStudents, totalFailStudents]);
 
       this.cdr.markForCheck();
     })
+  }
+
+  showChart(data: Array<number>) {
+    this.barChartDatasets = [
+      { 
+        data: data, 
+        label: 'Total',
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(255, 99, 132, 0.2)'
+        ], 
+        borderColor: [
+          'rgb(75, 192, 192)',
+          'rgb(255, 99, 132)'
+        ], 
+        borderWidth: 1
+      }
+    ];
   }
 }

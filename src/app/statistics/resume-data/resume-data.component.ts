@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { StudentDTO } from '../../Models/student.dto';
 import { StudentService } from '../../Services/student.service';
@@ -6,9 +6,9 @@ import { StudentService } from '../../Services/student.service';
 @Component({
   selector: 'app-resume-data',
   templateUrl: './resume-data.component.html',
-  styleUrl: './resume-data.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './resume-data.component.css'
 })
+
 export class ResumeDataComponent implements OnInit {
   students: StudentDTO[] = [];
 
@@ -53,11 +53,15 @@ export class ResumeDataComponent implements OnInit {
         }, { totalPassStudents: 0, totalFailStudents: 0 }
       )
 
-      this.doughnutChartDatasets = [
-        { data: [totalStudents, totalPassStudents, totalFailStudents], label: 'Total' },
-      ];
-
+      this.showChart([totalStudents, totalPassStudents, totalFailStudents]);
+      
       this.cdr.markForCheck();
     })
+  }
+
+  showChart(data: Array<number>) {
+    this.doughnutChartDatasets = [
+      { data: data, label: 'Total' },
+    ];
   }
 }

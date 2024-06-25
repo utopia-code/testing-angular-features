@@ -6,7 +6,7 @@ import { StudentService } from '../../Services/student.service';
 @Component({
   selector: 'app-gender',
   templateUrl: './gender.component.html',
-  styleUrl: './gender.component.css'
+  styleUrl: './gender.component.css',
 })
 export class GenderComponent implements OnInit {
   students: StudentDTO[] = [];
@@ -47,12 +47,15 @@ export class GenderComponent implements OnInit {
           return acc
         }, { totalMen: 0, totalWomen: 0 }
       )
-
-      this.pieChartDatasets = [
-        { data: [totalMen, totalWomen], label: 'Total' }
-      ]
+      this.showChart([totalMen, totalWomen])
 
       this.cdr.markForCheck();
     })
+  }
+
+  showChart(data: Array<number>) {
+    this.pieChartDatasets = [
+      { data: data, label: 'Total' },
+    ];
   }
 }

@@ -6,6 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './statistics-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StatisticsPageComponent {
-
-}
+export class StatisticsPageComponent { }
