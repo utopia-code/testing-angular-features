@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ChartConfiguration } from 'chart.js';
+import { Component, OnInit } from '@angular/core';
+import Chart from 'chart.js/auto';
 import { StudentDTO } from '../../Models/student.dto';
 import { StudentService } from '../../Services/student.service';
+
 
 @Component({
   selector: 'app-resume-data',
@@ -11,27 +12,11 @@ import { StudentService } from '../../Services/student.service';
 
 export class ResumeDataComponent implements OnInit {
   students: StudentDTO[] = [];
+  chart: any = [];
 
-  public doughnutChartLabels: string[] = [
-    'Alumnos',
-    'Aprobados',
-    'Suspendidos'
-  ];
-  public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
-    { data: [], label: '' },
-  ];
-
-  public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'];
-
-  constructor(
-    private studentService: StudentService, 
-    private cdr: ChangeDetectorRef
-  ) {
-    console.log('LoadingSlowComponent');
-
+  constructor( private studentService: StudentService) {
     const start = Date.now();
     while (Date.now() - start < 3000) {}
-
   }
 
   ngOnInit(): void {
@@ -40,7 +25,6 @@ export class ResumeDataComponent implements OnInit {
       this.students = students;
 
       const totalStudents = this.students.length;
-
       const { totalPassStudents, totalFailStudents } = this.students.reduce(
         (acc, student) => {
           if (student.note >= 5) {
@@ -54,14 +38,24 @@ export class ResumeDataComponent implements OnInit {
       )
 
       this.showChart([totalStudents, totalPassStudents, totalFailStudents]);
-      
-      this.cdr.markForCheck();
     })
   }
 
   showChart(data: Array<number>) {
-    this.doughnutChartDatasets = [
-      { data: data, label: 'Total' },
-    ];
+    this.chart = new Chart('resume', {
+      type: 'doughnut',
+      data: {
+        labels: ['Alumnos', 'Aprobados', 'Suspendidos'],
+        datasets: [
+          {
+            label: 'Total',
+            data: data,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {}
+    });
   }
+  
 }

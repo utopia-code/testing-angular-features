@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ChartConfiguration } from 'chart.js';
+import { Component, OnInit } from '@angular/core';
+import { Chart } from 'chart.js/auto';
 import { StudentDTO } from '../../Models/student.dto';
 import { StudentService } from '../../Services/student.service';
 
@@ -10,24 +10,9 @@ import { StudentService } from '../../Services/student.service';
 })
 export class GeneralResultsComponent implements OnInit{
   students: StudentDTO[] = [];
+  chart: any = [];
 
-  public barChartLabels: string[] = [
-    'Aprobados',
-    'Suspendidos'
-  ]
-
-  public barChartDatasets: ChartConfiguration<'bar'>['data']['datasets'] = [
-    { data: [], label: '', backgroundColor: [], borderColor: [], borderWidth: 1 }
-  ];
-
-  public barChartOptions: ChartConfiguration<'bar'>['options'] =  {
-    indexAxis: 'y'
-  }
-  
-  constructor(
-    private studentService: StudentService,
-    private cdr: ChangeDetectorRef
-  ) {
+  constructor(private studentService: StudentService) {
     const start = Date.now();
     while (Date.now() - start < 3000) {}
   }
@@ -49,26 +34,34 @@ export class GeneralResultsComponent implements OnInit{
       )
 
       this.showChart([totalPassStudents, totalFailStudents]);
-
-      this.cdr.markForCheck();
     })
   }
 
   showChart(data: Array<number>) {
-    this.barChartDatasets = [
-      { 
-        data: data, 
-        label: 'Total',
-        backgroundColor: [
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(255, 99, 132, 0.2)'
-        ], 
-        borderColor: [
-          'rgb(75, 192, 192)',
-          'rgb(255, 99, 132)'
-        ], 
-        borderWidth: 1
+    this.chart = new Chart('results', {
+      type: 'bar',
+      data: {
+        labels: ['Aprobados', 'Suspendidos'],
+        datasets: [
+          {
+            data: data, 
+            label: 'Total',
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(255, 99, 132, 0.2)'
+            ], 
+            borderColor: [
+              'rgb(75, 192, 192)',
+              'rgb(255, 99, 132)'
+            ], 
+            borderWidth: 1
+          },
+        ],
+      },
+      options: {
+        indexAxis: 'y'
       }
-    ];
+    });
   }
+
 }

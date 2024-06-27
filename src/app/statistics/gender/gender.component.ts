@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ChartConfiguration } from 'chart.js';
+import { Component, OnInit } from '@angular/core';
+import { Chart } from 'chart.js/auto';
 import { StudentDTO } from '../../Models/student.dto';
 import { StudentService } from '../../Services/student.service';
 
@@ -10,22 +10,9 @@ import { StudentService } from '../../Services/student.service';
 })
 export class GenderComponent implements OnInit {
   students: StudentDTO[] = [];
+  chart: any = [];
 
-  public pieChartLabels: string[] = [
-    'Masculino',
-    'Femenino'
-  ]
-
-  public pieChartDatasets: ChartConfiguration<'pie'>['data']['datasets'] = [
-    { data: [], label: '' }
-  ];
-
-  public pieChartOptions: ChartConfiguration<'pie'>['options'];
-
-  constructor(
-    private studentService: StudentService,
-    private cdr: ChangeDetectorRef
-  ) {
+  constructor(private studentService: StudentService) {
     const start = Date.now();
     while (Date.now() - start < 3000) {}
   }
@@ -33,8 +20,6 @@ export class GenderComponent implements OnInit {
   ngOnInit(): void {
     this.studentService.getStudents().subscribe((data) => {
       this.students = data;
-    
-      console.log(this.students)
 
       const { totalMen, totalWomen } = this.students.reduce(
         (acc, student) => {
@@ -47,15 +32,25 @@ export class GenderComponent implements OnInit {
           return acc
         }, { totalMen: 0, totalWomen: 0 }
       )
-      this.showChart([totalMen, totalWomen])
 
-      this.cdr.markForCheck();
+      this.showChart([totalMen, totalWomen])
     })
   }
 
   showChart(data: Array<number>) {
-    this.pieChartDatasets = [
-      { data: data, label: 'Total' },
-    ];
+    this.chart = new Chart('gender', {
+      type: 'pie',
+      data: {
+        labels: ['Masculino', 'Femenino'],
+        datasets: [
+          {
+            label: 'Total',
+            data: data,
+          },
+        ],
+      },
+      options: {}
+    });
   }
+
 }
